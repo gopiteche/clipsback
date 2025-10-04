@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Email Design</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body style="margin: 0; padding: 0;">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">	
+		<tr>
+			<td style="padding: 10px 0 30px 0;">
+				<table align="center" border="0" cellpadding="0" cellspacing="0" width="980" style="border: 1px solid #cccccc; border-collapse: collapse;">
+					<tr>
+					  <td>
+                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-bottom: 6px solid #51bd8b;">
+						  <tbody>
+<tr>
+                             
+							 <td align="left" style="width: 50%;color: #153643;font-size: 28px;font-weight: bold;font-family: Arial, sans-serif;padding-left: 40px;padding-top: 40px;padding-bottom: 40px;">
+							   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Pharmacy_Rx_symbol_used_on_prescriptions.svg/1200px-Pharmacy_Rx_symbol_used_on_prescriptions.svg.png" alt="Creating Email Magic" width="auto" height="90" style="display: block;">
+						     </td>
+							 
+							 <td align="right" style="color: #153643;font-size: 16px;font-weight: bold;font-family: Arial, sans-serif;width: 50%;/* text-align: center; */padding-right: 40px;background: #fff;vertical-align: bottom;padding-bottom: 30px;/* position: absolute; *//* bottom: 33px; *//* align-items: center; */text-align: end;">					     
+								<p style="margin-bottom: 0px;color: #7a7a7a;">{{pdfData.doctorName}} - {{pdfData.doctorId}}</p>
+								<p style="margin-top: 5px;color: #7a7a7a;">{{pdfData.designation}}
+						   </tr>
+						  </tbody>
+                    	</table>					
+					  </td>
+					</tr>
+					
+					
+					<tr>
+					  <td>
+                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
+						  <tbody>
+						   <tr>
+                             <td align="center" style="color: #153643;font-size: 16px;font-weight: bold;font-family: Arial, sans-serif;width: 33.3%;text-align: left;padding-left: 40px;background: #fff;vertical-align: bottom;padding-bottom: 15px;">						     
+							 <p style="margin-bottom: 0px;color: #121212;">Patient Name : {{pdfData.patientName}}</p>
+							 <p style="margin-top: 5px;color: #121212;margin-bottom: 0px;">Patient ID : {{pdfData.patientId}}</p>
+							 <p style="margin-top: 5px;color: #121212;margin-bottom: 0px;">Patient Age : {{pdfData.patientAge}}</p>
+							 <p style="margin-top: 5px;color: #121212;">Gender : {{pdfData.gender}}</p>
+							 </td>
+							 <td align="center" style="width: 33.3%;color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
+						     </td>
+                             <td align="center" style="width: 33.3%;color: #153643;font-weight: bold;font-family: Arial, sans-serif;text-align: right;padding-right: 40px;vertical-align: top;">
+						     <p style="margin-bottom: 0px;color: #121212;">Date:  {{pdfData.date}}</p>
+							 </td>
+						   </tr>
+						  </tbody>
+                    	</table>					
+					  </td>
+					</tr>
+					
+					
+					<tr>
+					  <td>
+                       <table style="border: 1px solid #7a7a7a;width: 92%;margin: 0 auto;border-spacing: unset;">
+					    <tbody style="background: #fff;border: 1px solid black;">
+					    <tr style="color: #fff;font-family: montserrat;font-size: 15px;background: #51bd8b;">
+                          <th style="Padding: 10px;">Medicine Name</th>
+                          <th>Form</th>
+                          <th>Strength</th>
+						  <th>Dose</th>
+						  <th>Route</th>
+						  <th>Frequency</th>
+						  <th>Limits</th>
+						  <th>Duration</th>
+						</tr>
+						{{#each prescriptionData}}
+
+						
+                         <tr style="color: #38afe1;font-family: montserrat;font-size: 15px;border-bottom: 2px solid white !important;border-spacing: initial;text-align: center;">
+                          <td style="padding: 8px;">{{this.medicineName}}</td>
+                          <td style="padding: 8px;">{{this.form}}</td>
+						  <td style="padding: 8px;">{{this.strength}}</td>
+						  <td style="padding: 8px;">{{this.dose}}</td>
+						  <td style="padding: 8px;">{{this.route}}</td>
+						  <td style="padding: 8px;">{{this.frequency}}</td>
+						  <td style="padding: 8px;">{{this.limits}}</td>
+						  <td style="padding: 8px;">{{this.duration}}</td>
+						</tr>
+						
+						{{/each}}
+						<!--
+                        <tr style="background: #efefef;color: #38afe1;font-family: montserrat;font-size: 15px;border-bottom: 2px solid white !important;border-spacing: initial;text-align: center;">
+                          <td style="padding: 8px;">Ringer Lactate</td>
+                          <td style="padding: 8px;">Injection</td>
+						  <td style="padding: 8px;">500ml</td>
+						  <td style="padding: 8px;">50-100ml/Hr</td>
+						  <td style="padding: 8px;">IV Infusion</td>
+						  <td style="padding: 8px;">Nil</td>
+						  <td style="padding: 8px;">Nil</td>
+						  <td style="padding: 8px;">Nil</td>
+                        </tr>  
+                        <tr style="color: #38afe1;font-family: montserrat;font-size: 15px;border-bottom: 2px solid white !important;border-spacing: initial;text-align: center;">
+                          <td style="padding: 8px;">Ringer Lactate</td>
+                          <td style="padding: 8px;">Injection</td>
+						  <td style="padding: 8px;">500ml</td>
+						  <td style="padding: 8px;">50-100ml/Hr</td>
+						  <td style="padding: 8px;">IV Infusion</td>
+						  <td style="padding: 8px;">Nil</td>
+						  <td style="padding: 8px;">Nil</td>
+						  <td style="padding: 8px;">Nil</td>
+                        </tr>
+                        <tr style="background: #efefef;color: #38afe1;font-family: montserrat;font-size: 15px;border-bottom: 2px solid white !important;border-spacing: initial;text-align: center;">
+                          <td style="padding: 8px;">Ringer Lactate</td>
+                          <td style="padding: 8px;">Injection</td>
+						  <td style="padding: 8px;">500ml</td>
+						  <td style="padding: 8px;">50-100ml/Hr</td>
+						  <td style="padding: 8px;">IV Infusion</td>
+						  <td style="padding: 8px;">Nil</td>
+						  <td style="padding: 8px;">Nil</td>
+						  <td style="padding: 8px;">Nil</td>
+                        </tr> -->
+                        </tbody>						
+                       </table>
+					  </td>
+					</tr>
+					
+					
+					<tr style="color: #38afe1;font-family: montserrat;font-size: 15px;">
+					  <td style="padding-left: 40px;font-weight:bold;padding-top: 15px;">
+					   <p>Advice(s)</p>
+					  </td>
+					</tr>
+					
+					
+					
+					
+					<tr>
+					  <td>
+                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
+						  <tbody>
+						   <tr>
+							 <td align="center" style="vertical-align: top;color: #153643;font-size: 16px;font-weight: bold;font-family: Arial, sans-serif;width: 33.3%;text-align: left;padding-left: 40px;background: #fff;padding-bottom: 30px;">
+							{{#each advices}}				     
+							 <span style="padding-bottom: 5px;display:block;color: #121212;">{{incremented @index}}) {{this}}</span>
+							 {{/each}}	
+							 <!-- <span style="padding-bottom: 5px;display:block;color: #121212;">2)To avoid Milk</span>
+							 <span style="padding-bottom: 5px;display:block;color: #121212;">3)To avoid Milk</span> -->
+							 </td>
+							 <td align="center" style="width: 33.3%;color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
+						     </td>
+                             <td align="center" style="width: 33.3%;color: #153643;font-weight: bold;font-family: Arial, sans-serif;text-align: right;padding-right: 40px;vertical-align: bottom;">
+							 <img src="{{signatureImage}}" alt="Creating Email Magic" width="300" height="230" style="/* display: block; */width: 177px;height: 100px;margin-right: 0px;text-align: center;">							 
+							 <p style="margin-bottom: 0px;color: #121212;">{{pdfData.doctorName}} - {{pdfData.doctorId}}</p>
+							 <p style="margin-top: 0px;color: #121212;">({{pdfData.designation}})</p>
+							 </td>
+						   </tr>
+						  </tbody>
+                    	</table>					
+					  </td>
+					</tr>
+					
+	</table>
+</body>
+</html>

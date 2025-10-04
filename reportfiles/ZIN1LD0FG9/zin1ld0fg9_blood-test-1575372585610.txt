@@ -1,0 +1,4 @@
+1)Add medicine style cursor => pointer need to be added.
+2)clear diagnosis selection when hit back button from medicine page.
+3)Multiple File uploads in clinical investigation page.
+4)

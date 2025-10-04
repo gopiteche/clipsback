@@ -1,0 +1,2 @@
+1) image width and height changed for signature pic.
+2)style.css --> Line No: 80 need to be commented

@@ -1,0 +1,39 @@
+{
+  "name": "clipskey",
+  "version": "1.0.0",
+  "description": "",
+  "main": "clips_server.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^3.1.9-1",
+    "dynamic-html-pdf": "^1.0.1",
+    "email-templates": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "firebase-admin": "^8.8.0",
+    "fs-extra": "^8.1.0",
+    "handlebars": "^4.4.0",
+    "jimp": "^0.9.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.0",
+    "mongoose-int32": "^0.3.1",
+    "mongoose-long": "^0.2.1",
+    "multer": "^1.4.2",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.3.1",
+    "path": "^0.12.7",
+    "razorpay": "^2.0.5",
+    "replace-color": "^2.1.0",
+    "s": "^1.0.0",
+    "sha256": "^0.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

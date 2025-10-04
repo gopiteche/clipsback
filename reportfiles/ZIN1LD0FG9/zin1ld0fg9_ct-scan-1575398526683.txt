@@ -1,0 +1,53 @@
+Minutes of Meeting:
+
+Topic : Case Transfer
+-------------------
+
+1 : Transfer the case to patient preferred location.(based on Pin Code).
+2 : Case Transfer automation is based on three factors,
+		*Geo Location
+		*Response Time
+		*Acceptance Ratio.
+3 : If Level L6 E is selected,then particular country need to be selected. 
+4 : Case Transferred to Doctor based on Level.
+5 : Push Notification to the doctors(using firebase).
+6 : Accept Case Transfer(ON / OFF) option need to be included in Doctors dashboard.
+7 : Case Transfer History need to be checked for approval.
+	 If not approved with in 24Hrs then case need to be transferred to another doctor.(Server Side Scheduler Task).
+8 : Approval from doctor end. If ignored, automatically assign to another doctor of same level.
+9 : Indication(notification) need to be send to the requested doctor and patient after the acceptance from the doctor.
+10: (removed) Fix Appointment - Removed temporarily due to high complexity.
+
+Topic : SMS Gateway
+-------------------
+
+1 : SMS needs to be sent when,
+		* Patient Registration
+		* Doctor Registration
+		* Patient Visit
+		* Case Transfer Notifications
+		* Payment reminder notifications.
+
+Topic : Payment Gateway
+-----------------------
+
+1 : Subscription Payment in Login Module(Changes need to be made).
+2 : L6E - Case Transfer based on country(Changes need to be made).
+3 : Currency Conversion need to be handled.
+4 : Bill generation for No.of.Visits between dates(Monthly/yearly payment).
+	 Note: For a same patient,if there are different visits within 3Hrs - to be considered as single visit.
+5 : Differentiating doctor[private or Govt.] using governed by field.(For Subscription Payment).
+6 : Payment Notification need to be sent for private doctors.
+
+Topic : Web UI Fixes
+--------------------
+
+1 : By Mr. Venkat - Admin Portal
+
+Topic : Admin Dashboard Analytics(Admin Panel)
+----------------------------------------------
+
+1 : Number of doctors, patients, total patient visit(need to show based on timeline).
+2 : Doctor History(Count of TotalVisits,Monthly Visits,Internal Case transfer,External Case transfer,Pending Case Transfer).
+3 : Patient History Statistics(Country based patient diagnosis).
+4 : Payment received, Pending Details.

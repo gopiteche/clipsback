@@ -1,0 +1,1 @@
+1) clips - subscription check need to be done before case transfer.
