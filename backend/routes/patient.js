@@ -24,7 +24,6 @@ let fs = require("fs-extra");
 var html = fs.readFileSync("./backend/routes/pdf.html", "utf8");
 
 const MIME_TYPE_MAP = {
-
   "image/jpg": "jpg",
   "image/png": "png",
   "image/jpeg": "jpeg",
@@ -34,33 +33,37 @@ const MIME_TYPE_MAP = {
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const isValid = MIME_TYPE_MAP[file.mimetype];
-    let error = new Error("Invalid mime type");
-    console.log("invaid..eror...");
-    if (isValid) {
-      error = null;
-      console.log("error,.....nulll......", error);
+    let error = null;
+    if (!isValid) {
+      error = new Error("Invalid mime type: " + file.mimetype);
+      console.error("Multer: invalid mime type for file", file.originalname, file.mimetype);
     }
-    // let type = req.body.type;
-    // console.log('type...', type);
-    // console.log('Req..body in multer..folderName', file.originalname);
-    console.log(
-      "Req..body in multer..folderName",
-      file.originalname.split("_")[0]
-    );
 
-    let path = `./reportfiles/${file.originalname.split("_")[0]}`;
-    fs.mkdirsSync(path);
+    // derive folder name from original filename safely
+    const folderName = file.originalname && file.originalname.indexOf("_") > -1 ? file.originalname.split("_")[0] : 'unknown';
+    console.log("Multer: storing file for folder", folderName);
 
-    cb(error, path);
+    // Use an absolute path relative to this file so behavior is consistent across CWDs
+    const destPath = path.join(__dirname, "..", "..", "reportfiles", folderName);
+
+    try {
+      fs.mkdirsSync(destPath);
+    } catch (mkdirErr) {
+      console.error("Multer: failed to create directory", destPath, mkdirErr);
+      return cb(mkdirErr);
+    }
+
+    cb(error, destPath);
     // http://52.14.30.0:3000/backend/images/doctor_profile-pic
   },
   filename: (req, file, cb) => {
-    const name = file.originalname
+    const safeName = (file.originalname || 'file')
       .toLowerCase()
       .split(" ")
       .join("-");
-    const ext = MIME_TYPE_MAP[file.mimetype];
-    cb(null, name + "-" + Date.now() + "." + ext);
+    const ext = MIME_TYPE_MAP[file.mimetype] || path.extname(file.originalname) || '';
+    const finalExt = ext && ext.indexOf('.') === -1 ? '.' + ext : ext;
+    cb(null, safeName + "-" + Date.now() + finalExt);
   }
 });
 
@@ -153,14 +156,14 @@ router.post(
     // console.log("req.body...test", req.body);
     let reportFilesArray = [];
     let fileArray = [];
-    for (let file of req.files) {
-      reportFilesArray.push(
-        `${baseURL}reportfiles/` +
-        file.originalname.split("_")[0] +
-        "/" +
-        file.filename
-      );
-      fileArray.push(file.originalname);
+    if (!req.files || !Array.isArray(req.files) || req.files.length === 0) {
+      console.warn('Multer: no files uploaded for patientHistory. Content-Type:', req.headers['content-type']);
+    } else {
+      for (let file of req.files) {
+        const folderName = file.originalname && file.originalname.indexOf("_") > -1 ? file.originalname.split("_")[0] : 'unknown';
+        reportFilesArray.push(`${baseURL}reportfiles/` + folderName + "/" + file.filename);
+        fileArray.push(file.originalname || file.filename);
+      }
     }
     let datajson = req.body.patientData;
     console.log("dataJSON..test", datajson);
@@ -500,13 +503,13 @@ router.put(
   async (req, res) => {
     console.log("request Data", req.body.patientData);
     let reportFilesArray = [];
-    for (let file of req.files) {
-      reportFilesArray.push(
-        `${baseURL}reportfiles/` +
-        file.originalname.split("_")[0] +
-        "/" +
-        file.filename
-      );
+    if (!req.files || !Array.isArray(req.files) || req.files.length === 0) {
+      console.warn('Multer: no files uploaded for patientHistory (PUT). Content-Type:', req.headers['content-type']);
+    } else {
+      for (let file of req.files) {
+        const folderName = file.originalname && file.originalname.indexOf("_") > -1 ? file.originalname.split("_")[0] : 'unknown';
+        reportFilesArray.push(`${baseURL}reportfiles/` + folderName + "/" + file.filename);
+      }
     }
     let datajson = req.body.patientData;
     let visitData = {};

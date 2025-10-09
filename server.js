@@ -90,12 +90,12 @@ mongoose.set('useUnifiedTopology', true);
 //using cors operation.
 app.use(cors());
 
-const server = app.listen(3000, function () {
-  let host = server.address().address;
-  let port = server.address().port;
+const server = app.listen(3000, '0.0.0.0', function () {
+  const addr = server.address();
+  let host = addr && addr.address ? addr.address : '0.0.0.0';
+  let port = addr && addr.port ? addr.port : 3000;
 
-  console.log('host...', host);
-
+  console.log('Server listening on %s:%s', host, port);
   console.log('App listening at http://%s:%s', host, port);
 });
 
